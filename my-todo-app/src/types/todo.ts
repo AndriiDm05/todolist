@@ -4,3 +4,5 @@ export type Todo = {
     completed: boolean;
     createdAt: number;
 };
+
+export type FilterValue = 'all' | 'active' | 'completed';
