@@ -6,3 +6,5 @@ export type Todo = {
 };
 
 export type FilterValue = 'all' | 'active' | 'completed';
+export type ThemeColor = 'blue' | 'purple' | 'green' | 'rose';
+export type AppMode = 'light' | 'navy';

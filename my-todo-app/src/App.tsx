@@ -1,9 +1,9 @@
-// src/App.tsx
 import { useState, useEffect } from 'react';
-import type { Todo, FilterValue } from './types/todo';
+import type { Todo, FilterValue, ThemeColor, AppMode } from './types/todo';
 import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
 import FilterBar from './components/FilterBar';
+import ThemeSettings from './components/ThemeSettings';
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>(() => {
@@ -13,9 +13,27 @@ function App() {
 
   const [filter, setFilter] = useState<FilterValue>('all');
 
+  const [themeColor, setThemeColor] = useState<ThemeColor>(() => {
+    const saved = localStorage.getItem('my-todo-theme');
+    return saved ? JSON.parse(saved) : 'blue';
+  });
+
+  const [appMode, setAppMode] = useState<AppMode>(() => {
+    const saved = localStorage.getItem('my-todo-mode');
+    return saved ? JSON.parse(saved) : 'light';
+  });
+
   useEffect(() => {
     localStorage.setItem('my-todo-tasks', JSON.stringify(todos));
   }, [todos]);
+
+  useEffect(() => {
+    localStorage.setItem('my-todo-theme', JSON.stringify(themeColor));
+  }, [themeColor]);
+
+  useEffect(() => {
+    localStorage.setItem('my-todo-mode', JSON.stringify(appMode));
+  }, [appMode]);
 
   const addTodo = (text: string) => {
     const newTodo: Todo = {
@@ -50,51 +68,73 @@ function App() {
   });
 
   const completedCount = todos.filter(t => t.completed).length;
+  
+  const themeClasses = {
+    blue: 'bg-blue-600',
+    purple: 'bg-purple-600',
+    green: 'bg-green-600',
+    rose: 'bg-rose-600'
+  };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4">
-      <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+    <div className={`min-h-screen py-12 px-4 transition-all duration-500 ${
+      appMode === 'navy' ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'
+    }`}>
+      <div className={`max-w-2xl mx-auto rounded-2xl shadow-2xl overflow-hidden border transition-all duration-500 ${
+        appMode === 'navy' ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100'
+      }`}>
         
-        <div className="bg-blue-600 p-8">
-          <h1 className="text-3xl font-bold text-white">Task Master</h1>
-          <p className="text-blue-100 mt-2">
+        <div className={`p-8 transition-colors duration-500 ${themeClasses[themeColor]}`}>
+          <h1 className="text-3xl font-bold text-white">To-Do List</h1>
+          <p className="text-white/80 mt-2 font-medium">
             {todos.length > 0 
               ? `${completedCount} of ${todos.length} tasks completed`
-              : "Your list is empty."}
+              : "Welcome! Add your first task below."}
           </p>
         </div>
 
-        <div className="p-8">
-          <TodoInput onAddTodo={addTodo} />
+        <div className="p-6 sm:p-8">
+          <ThemeSettings 
+            themeColor={themeColor} 
+            setThemeColor={setThemeColor} 
+            appMode={appMode} 
+            setAppMode={setAppMode} 
+          />
+
+          <TodoInput onAddTodo={addTodo} appMode={appMode} themeColor={themeColor} />
           
-          <FilterBar currentFilter={filter} onFilterChange={setFilter} />
+          <FilterBar currentFilter={filter} onFilterChange={setFilter} themeColor={themeColor} />
 
           <TodoList 
             todos={filteredTodos} 
             onToggle={toggleTodo} 
             onDelete={deleteTodo} 
+            appMode={appMode}
+            themeColor={themeColor}
           />
 
           {filteredTodos.length === 0 && (
             <div className="text-center py-12">
-              <span className="text-4xl">
-                {filter === 'completed' ? '⏳' : '✨'}
+              <span className="text-5xl block mb-4 opacity-50">
+                {filter === 'completed' ? '⏳' : '🎯'}
               </span>
-              <p className="text-slate-400 mt-4">
-                {filter === 'all' && "No tasks yet!"}
-                {filter === 'active' && "No active tasks. You're all caught up!"}
-                {filter === 'completed' && "No completed tasks yet. Keep going!"}
+              <p className="text-slate-400 font-medium">
+                {filter === 'all' && "No tasks found."}
+                {filter === 'active' && "Everything is done! Enjoy your day."}
+                {filter === 'completed' && "No completed tasks yet."}
               </p>
             </div>
           )}
 
           {completedCount > 0 && (
-            <button 
-              onClick={clearCompleted}
-              className="mt-6 text-sm text-red-500 hover:text-red-700 font-medium transition-colors"
-            >
-              Clear all completed tasks
-            </button>
+            <div className="mt-8 pt-6 border-t border-slate-100/10 text-right">
+              <button 
+                onClick={clearCompleted}
+                className="text-sm font-semibold text-red-500 hover:text-red-400 transition-colors"
+              >
+                Clear all completed tasks
+              </button>
+            </div>
           )}
         </div>
       </div>

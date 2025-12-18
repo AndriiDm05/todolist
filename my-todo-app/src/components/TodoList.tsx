@@ -5,10 +5,12 @@ type TodoListProps = {
     todos: Todo[];
     onToggle: (id: string) => void;
     onDelete: (id: string) => void;
+    appMode: 'light' | 'navy';
+    themeColor: 'blue' | 'purple' | 'green' | 'rose';
 }
 
 const TodoList = (props: TodoListProps) => {
-    const { todos, onToggle, onDelete } = props;
+    const { todos, onToggle, onDelete, appMode, themeColor } = props;
 
     if (todos.length === 0) return null;
 
@@ -19,7 +21,11 @@ const TodoList = (props: TodoListProps) => {
                     key={todo.id}
                     todo={todo}
                     onToggle={onToggle}
-                    onDelete={onDelete} />
+                    onDelete={onDelete}
+                    appMode={appMode}
+                    themeColor={themeColor}
+                    
+                />
             ))}
         </div>
     );
