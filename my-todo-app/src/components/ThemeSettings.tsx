@@ -1,4 +1,5 @@
 import type { ThemeColor, AppMode } from "../types/todo";
+import { Sun, Moon} from "lucide-react";
 
 type ThemeSettingsProps = {
     themeColor: ThemeColor;
@@ -34,13 +35,17 @@ const ThemeSettings = (props: ThemeSettingsProps) => {
 
             <button
                 onClick={() => setAppMode(appMode === 'light' ? 'navy' : 'light')}
-                className={`px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider transition-colors ${
+                className={`px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider transition-all duration-500 ${
                 appMode === 'navy' 
                     ? 'bg-slate-800 text-yellow-400 border border-slate-700' 
                     : 'bg-slate-200 text-slate-600'
                 }`}
             >
-                {appMode === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+                {appMode === 'light' ? (
+                    <Moon size={28} />
+                ) : (
+                    <Sun size={28} />
+                )}
             </button>
         </div>
     );

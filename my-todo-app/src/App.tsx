@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { ClipboardList, CheckCircle2, History } from 'lucide-react';
 import type { Todo, FilterValue, ThemeColor, AppMode } from './types/todo';
 import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
 import FilterBar from './components/FilterBar';
 import ThemeSettings from './components/ThemeSettings';
+import { themeClasses } from './components/ThemeClasses';
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>(() => {
@@ -68,13 +70,6 @@ function App() {
   });
 
   const completedCount = todos.filter(t => t.completed).length;
-  
-  const themeClasses = {
-    blue: 'bg-blue-600',
-    purple: 'bg-purple-600',
-    green: 'bg-green-600',
-    rose: 'bg-rose-600'
-  };
 
   return (
     <div className={`min-h-screen py-12 px-4 transition-all duration-500 ${
@@ -113,7 +108,7 @@ function App() {
             themeColor={themeColor}
           />
 
-          {filteredTodos.length === 0 && (
+          {/*filteredTodos.length === 0 && (
             <div className="text-center py-12">
               <span className="text-5xl block mb-4 opacity-50">
                 {filter === 'completed' ? '⏳' : '🎯'}
@@ -122,6 +117,20 @@ function App() {
                 {filter === 'all' && "No tasks found."}
                 {filter === 'active' && "Everything is done! Enjoy your day."}
                 {filter === 'completed' && "No completed tasks yet."}
+              </p>
+            </div>
+          )*/}
+          {filteredTodos.length === 0 && (
+            <div className="text-center py-12 flex flex-col items-center">
+              <div className="opacity-20 mb-4">
+                {filter === 'all' && <ClipboardList size={48} />}
+                {filter === 'active' && <CheckCircle2 size={48} />}
+                {filter === 'completed' && <History size={48} />}
+              </div>
+              <p className="text-slate-400 font-medium">
+                {filter === 'all' && "No tasks found."}
+                {filter === 'active' && "Everything is done!"}
+                {filter === 'completed' && "No history yet."}
               </p>
             </div>
           )}
