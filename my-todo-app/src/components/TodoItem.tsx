@@ -1,5 +1,5 @@
 import type { Todo, AppMode, ThemeColor } from '../types/todo';
-import { themeAccentClasses } from './ThemeClasses';
+import { themeAccentClasses } from '../types/ThemeClasses';
 
 type TodoItemProps = {
     todo: Todo;

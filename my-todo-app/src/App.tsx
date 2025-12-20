@@ -5,7 +5,7 @@ import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
 import FilterBar from './components/FilterBar';
 import ThemeSettings from './components/ThemeSettings';
-import { themeClasses } from './components/ThemeClasses';
+import { themeClasses } from './types/ThemeClasses';
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>(() => {
@@ -107,7 +107,7 @@ function App() {
             appMode={appMode}
             themeColor={themeColor}
           />
-          
+
           {filteredTodos.length === 0 && (
             <div className="text-center py-12 flex flex-col items-center">
               <div className="opacity-20 mb-4">

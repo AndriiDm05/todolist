@@ -1,5 +1,5 @@
 import type { FilterValue, ThemeColor } from '../types/todo';
-import { themeClasses } from './ThemeClasses';
+import { themeClasses } from '../types/ThemeClasses';
 
 type FilterBarProps = {
     currentFilter: FilterValue;

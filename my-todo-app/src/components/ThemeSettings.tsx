@@ -1,5 +1,5 @@
 import type { ThemeColor, AppMode } from "../types/todo";
-import { Sun, Moon} from "lucide-react";
+import { Sun, Moon } from "lucide-react";
 
 type ThemeSettingsProps = {
     themeColor: ThemeColor;

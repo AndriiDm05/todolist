@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { AppMode, ThemeColor } from '../types/todo';
-import { themeClasses, themeBorderClasses } from './ThemeClasses';
+import { themeClasses, themeBorderClasses } from '../types/ThemeClasses';
 
 type TodoInputProps = {
     onAddTodo: (text: string) => void;
