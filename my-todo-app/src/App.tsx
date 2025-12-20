@@ -107,19 +107,7 @@ function App() {
             appMode={appMode}
             themeColor={themeColor}
           />
-
-          {/*filteredTodos.length === 0 && (
-            <div className="text-center py-12">
-              <span className="text-5xl block mb-4 opacity-50">
-                {filter === 'completed' ? '⏳' : '🎯'}
-              </span>
-              <p className="text-slate-400 font-medium">
-                {filter === 'all' && "No tasks found."}
-                {filter === 'active' && "Everything is done! Enjoy your day."}
-                {filter === 'completed' && "No completed tasks yet."}
-              </p>
-            </div>
-          )*/}
+          
           {filteredTodos.length === 0 && (
             <div className="text-center py-12 flex flex-col items-center">
               <div className="opacity-20 mb-4">
