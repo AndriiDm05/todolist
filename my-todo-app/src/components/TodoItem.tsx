@@ -1,4 +1,3 @@
-// src/components/TodoItem.tsx
 import type { Todo, AppMode, ThemeColor } from '../types/todo';
 import { themeAccentClasses } from './ThemeClasses';
 
