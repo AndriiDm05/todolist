@@ -1,12 +1,12 @@
-import type { Todo } from "../types/todo";
+import type { Todo, AppMode, ThemeColor } from "../types/todo";
 import TodoItem from "./TodoItem";
 
 type TodoListProps = {
     todos: Todo[];
     onToggle: (id: string) => void;
     onDelete: (id: string) => void;
-    appMode: 'light' | 'navy';
-    themeColor: 'blue' | 'purple' | 'green' | 'rose';
+    appMode: AppMode;
+    themeColor: ThemeColor;
 }
 
 const TodoList = (props: TodoListProps) => {

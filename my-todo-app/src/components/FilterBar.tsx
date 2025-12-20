@@ -1,20 +1,14 @@
-import type { FilterValue } from '../types/todo';
+import type { FilterValue, ThemeColor } from '../types/todo';
+import { themeClasses } from '../types/ThemeClasses';
 
 type FilterBarProps = {
     currentFilter: FilterValue;
     onFilterChange: (filter: FilterValue) => void;
-    themeColor: 'blue' | 'purple' | 'green' | 'rose';
+    themeColor: ThemeColor;
 };
 
 const FilterBar = ({ currentFilter, onFilterChange, themeColor }: FilterBarProps) => {
   const filters: FilterValue[] = ['all', 'active', 'completed'];
-
-  const themeClasses = {
-    blue: 'bg-blue-600',
-    purple: 'bg-purple-600',
-    green: 'bg-green-600',
-    rose: 'bg-rose-600'
-  };
 
   return (
     <div className="flex justify-center gap-2 mb-6">

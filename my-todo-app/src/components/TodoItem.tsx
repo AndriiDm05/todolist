@@ -1,23 +1,16 @@
-// src/components/TodoItem.tsx
-import type { Todo, AppMode } from '../types/todo';
+import type { Todo, AppMode, ThemeColor } from '../types/todo';
+import { themeAccentClasses } from '../types/ThemeClasses';
 
-interface TodoItemProps {
+type TodoItemProps = {
     todo: Todo;
     onToggle: (id: string) => void;
     onDelete: (id: string) => void;
     appMode: AppMode;
-    themeColor: 'blue' | 'purple' | 'green' | 'rose';
+    themeColor: ThemeColor;
 }
 
 const TodoItem = (props: TodoItemProps) => {
     const { todo, onToggle, onDelete, appMode, themeColor } = props;
-
-    const themeClasses = {
-        blue: 'accent-blue-600',
-        purple: 'accent-purple-600',
-        green: 'accent-green-600',
-        rose: 'accent-rose-600'
-    }
 
     return (
         <div className={`group flex items-center justify-between p-4 border-b transition-all duration-300 ${
@@ -30,7 +23,7 @@ const TodoItem = (props: TodoItemProps) => {
                 type="checkbox"
                 checked={todo.completed}
                 onChange={() => onToggle(todo.id)}
-                className={`w-5 h-5 cursor-pointer transition-all duration-500 ${themeClasses[themeColor]}`}
+                className={`w-5 h-5 cursor-pointer transition-all duration-500 ${themeAccentClasses[themeColor]}`}
                 />
                 <span className={`transition-all ${
                 todo.completed 

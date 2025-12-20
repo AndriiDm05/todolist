@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import type { AppMode, ThemeColor } from '../types/todo';
+import { themeClasses, themeBorderClasses } from '../types/ThemeClasses';
 
 type TodoInputProps = {
     onAddTodo: (text: string) => void;
-    appMode: 'light' | 'navy';
-    themeColor: 'blue' | 'purple' | 'green' | 'rose';
+    appMode: AppMode;
+    themeColor: ThemeColor;
 }
 
 const TodoInput = (props: TodoInputProps) => {
@@ -15,20 +17,6 @@ const TodoInput = (props: TodoInputProps) => {
         if (!task.trim()) return;
         onAddTodo(task);
         setTask('');
-    };
-
-    const themeClasses = {
-        blue: 'bg-blue-600',
-        purple: 'bg-purple-600',
-        green: 'bg-green-600',
-        rose: 'bg-rose-600'
-    };
-
-    const themeBorderClasses = {
-        blue: 'focus:ring-blue-500',
-        purple: 'focus:ring-purple-500',
-        green: 'focus:ring-green-500',
-        rose: 'focus:ring-rose-500'
     };
 
     return (
